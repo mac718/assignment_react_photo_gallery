@@ -1,18 +1,18 @@
 import React from 'react';
-import instagramResponse from './photos';
+//import instagramResponse from './photos';
 
 
-const Panel = () => {
-  let photoData = instagramResponse.data[0];
+const Panel = ({user, createdAt, likeCount, commentCount}) => {
+  //let photoData = instagramResponse.data[0];
   return (
     <div className = 'panel'> 
-      <img src={photoData.caption.link} />
+      <img src={require('./profile_pic.jpg')} width='100%' alt='profile_pic' />
       <ul className="list-group">
-        <li className="list-group-item">User: {photoData.caption.from.username}</li>
-        <li className="list-group-item">Created at: {photoData.caption.created_time}</li>
-        <li className="list-group-item">Caption: {photoData.caption.text}</li>
-        <li className="list-group-item">Like count: {photoData.likes.count}</li>
-        <li className="list-group-item">Comment count: {photoData.comments.count}</li>
+        <li className="list-group-item"><strong>User:</strong> {user} </li>
+        <li className="list-group-item"><strong>Created at:</strong> {createdAt}</li>
+        <li className="list-group-item"><strong>Caption:</strong> caption</li>
+        <li className="list-group-item"><strong>Like count:</strong> {likeCount}</li>
+        <li className="list-group-item"><strong>Comment count:</strong> {commentCount}</li>
       </ul>
     </div>
   );
