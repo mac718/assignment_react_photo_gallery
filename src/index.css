@@ -13,3 +13,12 @@ code {
     monospace;
 }
 
+#filter-search-heading {
+text-align: left;
+}
+
+#filter-and-sort {
+  margin-bottom: 25px;
+  border: 1px solid;
+  background-color: lightGrey;
+}
