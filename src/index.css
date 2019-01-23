@@ -13,8 +13,8 @@ code {
     monospace;
 }
 
-#filter-search-heading {
-text-align: left;
+#filter-search-div {
+  margin-bottom: 20px;
 }
 
 #filter-and-sort {

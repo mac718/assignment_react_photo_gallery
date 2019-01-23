@@ -1,6 +1,9 @@
 import React from 'react';
 
-const SortButton = () => {
+const SortButton = ({onClick}) => {
+  return (
+    <button className="btn btn-primary" id="sort-button" onClick={onClick}>Sort</button>
+  )
 
 }
 

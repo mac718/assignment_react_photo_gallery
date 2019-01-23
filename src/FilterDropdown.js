@@ -1,4 +1,5 @@
 import React from 'react';
+import SortButton from './SortButton';
 
 const FilterDropdown = ({name, filters, onChange}) => {
   let options = filters.map((option, i) => (
@@ -6,9 +7,13 @@ const FilterDropdown = ({name, filters, onChange}) => {
       ));
 
   return(
-    <select id="filter-search" name={name} onChange={onChange}>
-      {options}
-    </select>
+    <div id="filter-search-div">
+      <h5>Filter Photos by Filter</h5>
+      <select id="filter-search" name={name} onChange={onChange}>
+        <option></option>
+        {options}
+      </select>
+    </div>
   )
 }
 
