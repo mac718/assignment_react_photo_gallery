@@ -10,7 +10,7 @@ const FilterDropdown = ({name, filters, onChange}) => {
     <div id="filter-search-div">
       <h5>Filter Photos by Filter</h5>
       <select id="filter-search" name={name} onChange={onChange}>
-        <option></option>
+        <option>All</option>
         {options}
       </select>
     </div>

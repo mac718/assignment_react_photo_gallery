@@ -3,12 +3,14 @@ import instagramResponse from './photos';
 import Panel from './Panel';
 import Row from './Row';
 import FilterDropdown from './FilterDropdown';
+import FilterAndSort from './FilterAndSort';
 
 class Gallery extends React.Component {
   constructor() {
     super();
     this.state = {
-      filter: ''
+      filter: 'All',
+      ascending: false
     };
   }
 
@@ -16,6 +18,12 @@ class Gallery extends React.Component {
     this.setState({
       [e.target.name]: [e.target.value]
     }, console.log(e.target.name, e.target.value))
+  }
+
+  onButtonClick = (e) => {
+    this.setState({
+      ascending: !this.state.ascending
+    }, console.log(this.state.ascending))
   } 
 
   _createPanelRows = (panels) => {
@@ -44,7 +52,9 @@ class Gallery extends React.Component {
     var allfilters = instagramResponse.data.map(photo => (photo.filter))
     var filters = [...new Set(allfilters)]; //filter out non-unique values from allFilters
 
-    if(filter[0] == null) {
+    console.log(filter[0])
+
+    if(filter == 'All') {
       photoData = instagramResponse.data;
     } else {
       photoData = instagramResponse.data.filter(photo => (
@@ -70,7 +80,7 @@ class Gallery extends React.Component {
 
     return(
       <div id='gallery'>
-        <FilterDropdown name='filter' filters={filters} onChange={this.onFilterChange}/>
+        <FilterAndSort filters={filters} onChange={this.onFilterChange} onClick={this.onButtonClick} />
         {rows}
       </div>
     )

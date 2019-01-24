@@ -18,6 +18,9 @@ code {
 }
 
 #filter-and-sort {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   margin-bottom: 25px;
   border: 1px solid;
   background-color: lightGrey;
