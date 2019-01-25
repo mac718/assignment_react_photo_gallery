@@ -10,7 +10,8 @@ class Gallery extends React.Component {
     super();
     this.state = {
       filter: 'All',
-      ascending: false
+      ascending: false,
+      searchTerm: ''
     };
   }
 
@@ -20,10 +21,16 @@ class Gallery extends React.Component {
     }, console.log(e.target.name, e.target.value))
   }
 
-  onButtonClick = (e) => {
+  onSortClick = (e) => {
     this.setState({
       ascending: !this.state.ascending
     }, console.log(this.state.ascending))
+  }
+
+  onSearchClick = (e) => {
+    this.setState({
+      searchTerm: [e.target.previousSibling][0].value
+    })
   } 
 
   _createPanelRows = (panels) => {
@@ -46,7 +53,7 @@ class Gallery extends React.Component {
 
   render() {
 
-    const {filter} = this.state;
+    const {filter, ascending, searchTerm} = this.state;
     var photoData;
 
     var allfilters = instagramResponse.data.map(photo => (photo.filter))
@@ -60,6 +67,26 @@ class Gallery extends React.Component {
       photoData = instagramResponse.data.filter(photo => (
         photo.filter == filter
       ))
+    }
+
+    if(ascending) {
+      photoData = photoData.sort((a, b) => {
+        return a.created_time - b.created_time;
+      })
+    } else {
+      photoData = photoData.sort((a, b) => {
+        return b.created_time - a.created_time;
+      })
+    }
+
+    if(searchTerm != ''){
+      photoData = instagramResponse.data.filter(photo => {
+        if(searchTerm.includes(photo.user.username)){
+          return photo
+        } else if (photo.caption && searchTerm.includes(photo.caption.text)){
+          return photo
+        }
+      })
     }
 
     var panels = photoData.map((photo, index) => (
@@ -80,7 +107,7 @@ class Gallery extends React.Component {
 
     return(
       <div id='gallery'>
-        <FilterAndSort filters={filters} onChange={this.onFilterChange} onClick={this.onButtonClick} />
+        <FilterAndSort filters={filters} onChange={this.onFilterChange} onSortClick={this.onSortClick} onSearchClick={this.onSearchClick} />
         {rows}
       </div>
     )
