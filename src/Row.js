@@ -2,7 +2,7 @@ import React from 'react';
 
 const Row = ({panel1, panel2, panel3, onFilterChange}) => {
   var panels = [panel1, panel2, panel3];
-  console.log(panels)
+  
   panels = panels.filter(panel => (panel != undefined));
 
   panels = panels.map((panel, index) => (
