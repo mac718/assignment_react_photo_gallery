@@ -8,7 +8,7 @@ const FilterDropdown = ({name, filters, onChange}) => {
 
   return(
     <div id="filter-search-div">
-      <h5>Filter Photos by Filter</h5>
+      <h5>Filter Photos by IG Filter</h5>
       <select id="filter-search" name={name} onChange={onChange}>
         <option>All</option>
         {options}

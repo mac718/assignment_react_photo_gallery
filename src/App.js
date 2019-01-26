@@ -12,7 +12,7 @@ class App extends Component {
     //const {filter} = this.state;
     return (
       <div className="App container">
-        <h1>React Photo Gallery</h1>
+        <h1 id="gallery-heading">React Photo Gallery</h1>
         <Gallery filter='none' />
       </div>
     );
