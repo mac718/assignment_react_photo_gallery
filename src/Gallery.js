@@ -83,21 +83,31 @@ class Gallery extends React.Component {
       photoData = instagramResponse.data.filter(photo => {
         if(searchTerm.includes(photo.user.username)){
           return photo
-        } else if (photo.caption && searchTerm.includes(photo.caption.text)){
+        } else if (photo.caption && photo.caption.text.includes(searchTerm)){
           return photo
         }
       })
     }
 
-    var panels = photoData.map((photo, index) => (
-      <Panel user={photo.user.username} 
-        createdAt={photo.created_time} 
-        likeCount={photo.likes.count} 
-        commentCount={photo.comments.count} 
-        filter={photo.filter}
-        key={index} 
-      />
-    ))
+    var panels = photoData.map((photo, index) => {
+      let caption;
+      
+      if(photo.caption) {
+        caption = photo.caption.text
+      } else {
+        caption = ''
+      }
+      return (
+        <Panel user={photo.user.username} 
+          createdAt={photo.created_time} 
+          caption={caption}
+          likeCount={photo.likes.count} 
+          commentCount={photo.comments.count} 
+          filter={photo.filter}
+          key={index} 
+        />
+      )
+    })
 
     var rows = this._createPanelRows(panels);
 
