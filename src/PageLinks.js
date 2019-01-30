@@ -7,8 +7,8 @@ const PageLinks = ({numberOfPages, onPageClick}) => {
     pageLinks.push(<li class="page-item"><a class="page-link" href="#" onClick={onPageClick}>{i}</a></li>)
   }
   return (
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
+    <nav id="page-links" aria-label="Page navigation">
+      <ul class="pagination pagination-lg justify-content-center">
         {pageLinks}
       </ul>
     </nav>

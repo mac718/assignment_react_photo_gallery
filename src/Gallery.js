@@ -17,6 +17,8 @@ class Gallery extends React.Component {
     };
   }
 
+  //Event Handlers
+
   onFilterChange = (e) => {
     this.setState({
       [e.target.name]: [e.target.value]
@@ -39,7 +41,9 @@ class Gallery extends React.Component {
     this.setState({
       currentPage: [e.target.innerText]
     })
-  } 
+  }
+
+  //Helper Functions 
 
   _createPanelRows = (panels, currentPage) => {
     var rows = []
@@ -67,10 +71,10 @@ class Gallery extends React.Component {
       let page = []
 
       panels.forEach((panel, i) => {
-        if(i < 12 || (i % 12 != 0 && i < panels.length - 1)) {
+        if((i < 12 && i < panels.length - 1) || (i % 12 != 0 && i < panels.length - 1)) {
           console.log(i)
           page.push(panel)
-        } else if(i % 12 != 0 && i == panels.length - 1){
+        } else if((i < 12 || i % 12 != 0) && i == panels.length - 1){
           page.push(panel)
           paginatedPanels.push(page)
         } else {
@@ -144,12 +148,16 @@ class Gallery extends React.Component {
 
     var numberOfPages = paginatedPanels.length;  
 
+    if(numberOfPages > 0){
+      var rows = this._createPanelRows(paginatedPanels, currentPage);
 
-    var rows = this._createPanelRows(paginatedPanels, currentPage);
 
-    rows = rows.map((row, index) => (
-      <Row panel1={row[0]} panel2={row[1]} panel3={row[2]} onChange={this.onFilterChange} key={index} />
-    ))
+      rows = rows.map((row, index) => (
+        <Row panel1={row[0]} panel2={row[1]} panel3={row[2]} onChange={this.onFilterChange} key={index} />
+      ))
+    } else {
+      rows = [];
+    }
 
     return(
       <div id='gallery'>
